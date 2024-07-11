@@ -31,16 +31,16 @@ const Game = () => {
 
   const resetGame = () => {
     setSquares(Array(9).fill(null));
-    setIsXNext(true);
-    setIsNewGame(false);
     setWinner(null);
   };
 
   const startNewGame = () => {
     resetGame();
-    setPlayer1("Player 1");
-    setPlayer2("Player 2");
     setIsNewGame(true);
+  };
+
+  const handleStartGame = () => {
+    setIsNewGame(false);
   };
 
   const status = winner ? `Winner: ${winner}` : `Next player: ${isXNext ? player1 : player2}`;
@@ -50,6 +50,7 @@ const Game = () => {
       {winner && <Confetti />}
       {isNewGame ? (
         <div className="space-y-2">
+          <h2 className="text-xl font-semibold text-blue-900">Enter Player Names:</h2>
           <input
             type="text"
             value={player1}
@@ -66,7 +67,7 @@ const Game = () => {
           />
           <button
             className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300 w-full"
-            onClick={() => setIsNewGame(false)}
+            onClick={handleStartGame}
           >
             Start Game
           </button>
